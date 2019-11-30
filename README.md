@@ -12,6 +12,8 @@ VentIt is a discussion and content rating site which allows users to create and 
 ## Post-MVP
 * Users can change avatars
 * Users can join communities 
+* User can change settings
+* DarkMode
 
 # ERD
 
@@ -35,9 +37,23 @@ VentIt is a discussion and content rating site which allows users to create and 
     <LoginForm/><RegisterForm/>
  <Main/>
   <SubVents/>
+    <SubVentForm/>
     <Posts/>
        <PostForm/>
        <Comments/>
  <Footer/>
 ```
       
+# Endpoints
+
+|Endpoint|Purpose|
+|---|---|
+|/|Homepage- List of sub-domains(Read,Update,Create,Delete)|
+|/create_subvent|User can create a sub-domain(Create)|
+|/register|for User registration|
+|/login|for User login|
+|/user/:username|for User profile|
+|/user/settings|for User settings|
+|/v/:vent_title| User selected sub-domain,Lists posts in that domain(Read)|
+|/v/:vent_title/:post_id|User selected Post(Read,Update,delete)|
+|/v/:vent_title/create_post|User creates a post in selected subdomain(Create)|
