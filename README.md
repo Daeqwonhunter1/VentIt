@@ -33,12 +33,14 @@ VentIt is a discussion and content rating site which allows users to create and 
 ```
  <App/>
  <Header/>
-   <Profile/>
+   <UserProfile/>
     <LoginForm/><RegisterForm/>
  <Main/>
   <SubVents/>
+   <UserSubVent/>
     <SubVentForm/>
     <Posts/>
+     <UserPost/>
        <PostForm/>
        <Comments/>
  <Footer/>
@@ -57,3 +59,28 @@ VentIt is a discussion and content rating site which allows users to create and 
 |/v/:vent_title| User selected sub-domain,Lists posts in that domain(Read)|
 |/v/:vent_title/:post_id|User selected Post(Read,Update,delete)|
 |/v/:vent_title/create_post|User creates a post in selected subdomain(Create)|
+
+# Dependencies
+
+## Front-End
+* React
+* Axios
+* React-Router
+
+## Back-End
+* Ruby On Rails
+
+
+# Time Frames
+|Component|Priority|Estimated Time|Time Invested|Actual Time|
+|---|---|---|---|---|
+|UserProfile|H|3h| | |
+|LoginForm|H|2h| | |
+|RegisterForm|H|2h| | |
+|Subvents|H|4h| | |
+|UserSubvent|H|3h| | |
+|Posts|M|3h| | |
+|UserPost|M|3h| | |
+|PostForm|M|2h| | |
+|Comments|L|3h| | |
+
