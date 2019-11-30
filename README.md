@@ -20,4 +20,8 @@ VentIt is a discussion and content rating site which allows users to create and 
 
 # Wireframe
 
-![UserPosts](/Users/Desktop/UserPosts.png)
+![Register](https://github.com/Daeqwonhunter1/VentIt/blob/master/Register.png)
+![LogIn](https://github.com/Daeqwonhunter1/VentIt/blob/master/LogIn.png)
+![Sub-domain List](https://github.com/Daeqwonhunter1/VentIt/blob/master/Subdomain-list.png)
+![UserPosts](https://github.com/Daeqwonhunter1/VentIt/blob/master/UserPosts.png)
+![SinglePost](https://github.com/Daeqwonhunter1/VentIt/blob/master/singlepost.png)
