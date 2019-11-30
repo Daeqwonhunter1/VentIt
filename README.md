@@ -12,3 +12,12 @@ VentIt is a discussion and content rating site which allows users to create and 
 ## Post-MVP
 * Users can change avatars
 * Users can join communities 
+
+# ERD
+
+![ERD](https://github.com/Daeqwonhunter1/VentIt/blob/master/Vent%20It%20ERD.png)
+
+
+# Wireframe
+
+![UserPosts](/Users/Desktop/UserPosts.png)
