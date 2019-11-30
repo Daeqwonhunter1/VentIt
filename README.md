@@ -28,14 +28,14 @@ VentIt is a discussion and content rating site which allows users to create and 
 
 
 # Component Heiracrchy 
-<App>
-  <Header>
-    <Profile>
-      <LoginForm><RegisterForm>
-  <Main>
-    <SubVents>
-      <Posts>
-        <Comments>
-        <PostForm>
+# <App>
+  # <Header>
+ #   <Profile>
+  #    <LoginForm><RegisterForm>
+ # <Main>
+  #  <SubVents>
+   #   <Posts>
+    #    <Comments>
+     #   <PostForm>
           
       
