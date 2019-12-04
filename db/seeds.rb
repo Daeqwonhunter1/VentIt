@@ -21,8 +21,9 @@ Comment.create(content: "Cats are Good WTF",post_id:3)
 Post.create(post_title: "Cats are COol",post_content: "My Cat licked me last night",subvent_id:2)
 Comment.create(content: "Cats are trash",post_id:4)
 
+# Comment.create(content: "Cats are trash,but good",comment_id:4)
 
-User.create(username: "BigJohn97",email: "BigJohn97@gmail.com",password_digest:"1231")
+User.create(username: "BigJohn97",email: "BigJohn97@gmail.com",password:"1231")
 
 
 
