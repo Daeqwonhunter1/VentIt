@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
   
   def show
     @comments = Comment.find(params[:id])
-    render json: @comment
+    render json: @comments
   end
 
   def create
