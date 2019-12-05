@@ -2,8 +2,6 @@ import React from 'react';
 import './App.css';
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import Login from './components/Login';
-import Register from './components/Register';
 import Header from './components/Header';
 import {
   loginUser,
@@ -13,6 +11,8 @@ import {
 
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
+import SubventContainer from './components/SubventConainer'
+import UserModal from './components/UserModal';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,10 +20,16 @@ class App extends React.Component {
     this.state = {
       authErrorMessage: "",
       currentUser: null,
+      postFormData: {
+        post_title: null,
+        post_content: null,
+        comments: null
+
+      }
     };
   }
 
-
+  /* /// ===================== Auth ======================================== */
   handleRegister = async (registerData) => {
     const currentUser = await registerUser(registerData)
     if (currentUser.error) {
@@ -71,38 +77,38 @@ class App extends React.Component {
     this.handleVerify()
 
   }
+  /* /// ================================================================== */
 
 
 
-  
   render() {
-
     const errorMessage = this.state.hasError
       ? <p>  Error</p> : null
     return (
       <div className="app">
-        <Header
         
-           handleLogout={this.handleLogout}
+        <UserModal
+          handleLogout={this.handleLogout}
           currentUser={this.state.currentUser}
+          handleLogin={this.handleLogin}
+          authErrorMessage={this.state.authErrorMessage}
+          handleRegister={this.handleRegister} />
+
+
           
-
-        />
-
-
-{/* /// ===================== Auth ======================================== */}
-
-        <Route path="/login" render={() => (
+        
+        {/* <Route path="/login" render={() => (
           <LoginForm
             handleLogin={this.handleLogin}
             authErrorMessage={this.state.authErrorMessage} />)}
         />
         <Route path="/register" render={() => (
           <RegisterForm
-          handleRegister={this.handleRegister}
-          authErrorMessage={this.state.authErrorMessage}
-             />)}
-        />
+            handleRegister={this.handleRegister}
+            authErrorMessage={this.state.authErrorMessage}
+          />)}
+        /> */}
+        <SubventContainer currentUser={this.state.currentUser} />
 
       </div>
     );

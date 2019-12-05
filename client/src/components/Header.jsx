@@ -1,30 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, NavDropdown, Button, Modal, Show } from 'react-bootstrap'
+import LoginForm from './LoginForm';
 
 
-export default function Header(props) {
-  return (
-    <header>
-      <h1>Ventit</h1>
-      <div>
-        {props.currentUser
+
+
+export default class Header extends React.Component {
+  state = {
+    show: true
+  }
+
+
+  render() {
+    return (
+
+      <>
+        {this.props.currentUser
           ?
-          <div id="user-info">
+          <>
+            <Navbar bg="dark">
+              <Navbar.Brand href="/">Vent IT</Navbar.Brand>
+              <Navbar.Toggle />
+              <div className="User">
+                <Navbar.Collapse >
+                  <Navbar.Text>
+                    <NavDropdown title={this.props.currentUser.username} id="basic-nav-dropdown">
+                      <NavDropdown.Item href="#action/3.1">Test</NavDropdown.Item>
+                      <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                      <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item onClick={this.props.handleLogout} href="/">Logout</NavDropdown.Item>
+                    </NavDropdown>
+                  </Navbar.Text>
+                </Navbar.Collapse>
+              </div>
+            </Navbar>
+          </>
 
-            <p id="user">{`Hello, ${props.currentUser.username}`}</p>
-            <Link to='/register'><button onClick={props.handleLogout}>Logout</button></Link>
-
-          </div>
           :
-          <Link to='/login'><button>Login/register</button></Link>
+          <>
+            <Navbar bg="dark">
+              <Navbar.Brand href="/">Vent IT</Navbar.Brand>
+              <div className="User">
+                <button onClick={this.props.handleLoginClick}>
+                  Login
+                </button>
+                <button onClick={this.props.handleRegisterClick}>
+                  Register
+                </button>
+              </div>
+            </Navbar>
 
+          </>
         }
-
-      </div>
-
-    </header>
-
-  )
+      </>
 
 
+
+    )
+
+  }
 }

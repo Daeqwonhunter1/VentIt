@@ -20,3 +20,14 @@
 .App-link {
   color: #09d3ac;
 }
+
+
+
+.User {
+  position: relative;
+  left:143vh
+}
+
+#login-submit-button {
+  padding:10px;
+}
