@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_185341) do
+ActiveRecord::Schema.define(version: 2019_12_05_200311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 2019_12_02_185341) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["subvent_id"], name: "index_posts_on_subvent_id"
-    # Need a ref to user
   end
 
   create_table "subvents", force: :cascade do |t|
@@ -46,7 +45,8 @@ ActiveRecord::Schema.define(version: 2019_12_02_185341) do
     t.bigint "members"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    # Need a ref to user
+    t.bigint "users_id", null: false
+    t.index ["users_id"], name: "index_subvents_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 2019_12_02_185341) do
     t.text "user_image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    # Need a ref to user
   end
 
   add_foreign_key "comments", "posts"
   add_foreign_key "posts", "subvents"
+  add_foreign_key "subvents", "users", column: "users_id"
 end
