@@ -17,11 +17,10 @@
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+
+body {
+  background-color: aquamarine;
 }
-
-
 
 .User {
   position: relative;
@@ -30,4 +29,107 @@
 
 #login-submit-button {
   padding:10px;
+}
+
+#register-link {
+  position: relative;
+  left:25%
+}
+#subvents-list {
+  background-color: #11d1e24b;
+  height:100%;
+}
+
+
+
+.subvent-header {
+  text-align:center;
+  font-size:30px;
+  color:whitesmoke;
+  padding:10px;
+}
+
+.Cards {
+ position: relative;
+ left:30%;
+ background-color: rgb(255, 255, 255);
+ box-shadow:10px 10px 5px black
+ 
+}
+
+#subvents {
+  padding:10px
+}
+.nav {
+  height:100px;
+}
+
+.card_image {
+  width:250px;
+  height:200px;
+}
+
+.card_title {
+  font-size:35px;
+  color:blue;
+  transform: translate(300px,-220px);
+}
+/* .card_description {
+  color:red;
+  transform: translate(240px,-240px);
+  width:48vh;
+  height: 45vh;
+
+} */
+
+.card_button {
+  position: absolute;
+  left:0px;
+  top:10px;
+}
+
+.dots {
+  transform: translate(550px, 0px) rotate(90deg);
+ 
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  
+}
+.dots:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 2px;
+  margin-left: -1px;
+  margin-top: -1px;
+  color:black;
+  background-color: black;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px black, 0 11px 0 2px black, 0 -11px 0 2px black;
+}
+
+#dropdown-basic {
+  background-color: white;
+  border: 0px;
+}
+
+#dropdown-basic:active{
+  background-color: white;
+  border: 0px solid white;
+
+}
+.dots {
+  position: relative;
+  top:-50px
+}
+.drop {
+  width:0px;
+  height:0px;
+}
+
+.Delete {
+  background-color: red;
 }

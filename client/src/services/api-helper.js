@@ -34,8 +34,10 @@ export const showAllSubvents = async () => {
 
 export const showOneSubvent = async (subventId) => {
   const resp = await api.get(`/subvents/${subventId}`)
-  return resp.data
+  return resp.data.user_id
 }
+
+
 
 export const showAllPostsInSubvent = async (subventId) => {
   const resp = await api.get(`/subvents/${subventId}/posts`)
@@ -64,51 +66,51 @@ export const postSubvent = async (subventData) => {
   return resp.data
 }
 
-export const postNewPostInSubvent = async (subventId, subventData) => {
-  const resp = await api.post(`/subvent/${subventId}/posts`, subventData)
+export const postNewPostInSubvent = async (subventId, postData) => {
+  const resp = await api.post(`/subvents/${subventId}/posts`, postData)
   return resp.data
 }
 
 
 export const postNewCommentInPost = async (subventId,postId,postData) => {
-  const resp = await api.post(`/subvent/${subventId}/posts/${postId}/comments`, postData)
+  const resp = await api.post(`/subvents/${subventId}/posts/${postId}/comments`, postData)
   return resp.data
 }
 
 export const replyToComment = async (subventId, postId,commentId, commentData) => {
-  const resp = await api.post(`/subvent/${subventId}/posts/${postId}/comments/${commentId}`, commentData)
+  const resp = await api.post(`/subvents/${subventId}/posts/${postId}/comments/${commentId}`, commentData)
   return resp.data
 }
 ///===========================================Update===========================================///
 
 export const updateSubvent = async (subventId,subventData) => {
-  const resp = await api.put(`/subvent/${subventId}`, subventData)
+  const resp = await api.put(`/subvents/${subventId}`, subventData)
   return resp.data
 }
 
 export const updatePostInSubvent = async (subventId, postId, postData) => {
-  const resp = await api.put(`/subvent/${subventId}/posts/${postId}`, postData)
+  const resp = await api.put(`/subvents/${subventId}/posts/${postId}`, postData)
   return resp.data
 }
 
 export const updateCommentInPost = async (subventId, postId, commentId, commentData) => {
-  const resp = await api.put(`/subvent/${subventId}/posts/${postId}/comments/${commentId}`, commentData)
+  const resp = await api.put(`/subvents/${subventId}/posts/${postId}/comments/${commentId}`, commentData)
   return resp.data
 }
 
 ///===========================================Delete===========================================///
 
 export const destroySubvent = async (subventId) => {
-  const resp = await api.delete(`/subvent/${subventId}`)
+  const resp = await api.delete(`/subvents/${subventId}`)
   return resp.data
 }
 
 export const destroyPostInSubvent = async (subventId, postId) => {
-  const resp = await api.delete(`/subvent/${subventId}/posts/${postId}`)
+  const resp = await api.delete(`/subvents/${subventId}/posts/${postId}`)
   return resp.data
 }
 
 export const destroyCommentInPost = async (subventId, postId, commentId) => {
-  const resp = await api.delete(`/subvent/${subventId}/posts/${postId}/comments/${commentId}`)
+  const resp = await api.delete(`/subvents/${subventId}/posts/${postId}/comments/${commentId}`)
   return resp.data
 }

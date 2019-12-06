@@ -11,12 +11,12 @@ class PostsController < ApplicationController
 
   def show
     @posts = Post.find(params[:id])
-    render json: @post
+    render json: @posts
   end
 
   def create
     @post = Post.new(post_params)
-
+    
     if @post.save
       render json: @post, status: :created, location: @post
     else
@@ -54,7 +54,7 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:post_title, :post_content, :upvotes, :downvotes, )
+      params.require(:post).permit(:post_title, :post_content, :upvotes, :downvotes )
     end
 end
 

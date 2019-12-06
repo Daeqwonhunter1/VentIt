@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_200311) do
+ActiveRecord::Schema.define(version: 2019_12_02_185341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,13 @@ ActiveRecord::Schema.define(version: 2019_12_05_200311) do
     t.bigint "upvotes"
     t.bigint "downvotes"
     t.bigint "post_id", null: false
+    t.bigint "user_id"
+    t.bigint "comment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_comments_on_comment_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -31,9 +35,11 @@ ActiveRecord::Schema.define(version: 2019_12_05_200311) do
     t.bigint "upvotes"
     t.bigint "downvotes"
     t.bigint "subvent_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["subvent_id"], name: "index_posts_on_subvent_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "subvents", force: :cascade do |t|
@@ -43,10 +49,10 @@ ActiveRecord::Schema.define(version: 2019_12_05_200311) do
     t.bigint "subvent_upvotes"
     t.bigint "subvent_downvotes"
     t.bigint "members"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id", null: false
-    t.index ["users_id"], name: "index_subvents_on_users_id"
+    t.index ["user_id"], name: "index_subvents_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,7 +64,10 @@ ActiveRecord::Schema.define(version: 2019_12_05_200311) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "comments", "comments"
   add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "posts", "subvents"
-  add_foreign_key "subvents", "users", column: "users_id"
+  add_foreign_key "posts", "users"
+  add_foreign_key "subvents", "users"
 end

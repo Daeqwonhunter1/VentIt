@@ -7,7 +7,7 @@ class CreateSubvents < ActiveRecord::Migration[6.0]
       t.bigint :subvent_upvotes
       t.bigint :subvent_downvotes
       t.bigint :members
-
+      t.references :user, null: true, foreign_key:true
       t.timestamps
     end
   end

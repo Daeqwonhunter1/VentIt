@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
-import { Navbar, NavDropdown, Button, Modal, Show } from 'react-bootstrap'
+import {  Button, Modal } from 'react-bootstrap'
 
 
 class UserModal extends Component {
@@ -30,6 +30,7 @@ class UserModal extends Component {
     })
   }
   render() {
+ 
     return (
       <div>
         <Header handleLoginClick={this.handleShowLogin}
@@ -63,6 +64,7 @@ class UserModal extends Component {
             
           </Modal.Footer>
         </Modal>
+        
       </div>
     );
   }

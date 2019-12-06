@@ -17,7 +17,7 @@ class SubventsController < ApplicationController
   # POST /subvents
   def create
     @subvent = Subvent.new(subvent_params)
-
+    @subvent.user = @current_user
     if @subvent.save
       render json: @subvent, status: :created, location: @subvent
     else
@@ -47,6 +47,6 @@ class SubventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def subvent_params
-      params.require(:subvent).permit(:vent_title, :description, :image_url, :subvent_upvotes, :subvent_downvotes, :members)
+      params.require(:subvent).permit(:vent_title, :description, :image_url, :subvent_upvotes, :subvent_downvotes, :members, :user_id)
     end
 end

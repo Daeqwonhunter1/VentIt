@@ -1,30 +1,32 @@
 import React from 'react';
 import './App.css';
-import { Route, Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
-import Header from './components/Header';
+import { withRouter } from 'react-router-dom';
+
 import {
   loginUser,
   registerUser,
   verifyUser
 } from './services/api-helper';
-
-import LoginForm from './components/LoginForm'
-import RegisterForm from './components/RegisterForm'
 import SubventContainer from './components/SubventConainer'
 import UserModal from './components/UserModal';
+import PostContainer from './components/PostContainer';
+import Header from './components/Header'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       authErrorMessage: "",
-      currentUser: null,
+     
       postFormData: {
         post_title: null,
         post_content: null,
         comments: null
-
+      },
+      currentUser: {
+        id: null,
+        username: null,
+        email: null
       }
     };
   }
@@ -54,7 +56,12 @@ class App extends React.Component {
       this.logErrorToMyService();
       console.log("i don't work")
     } else {
-      this.setState({ currentUser });
+      this.setState({
+        currentUser: {
+          id: currentUser.id,
+          username: currentUser.username,
+          email: currentUser.email
+      } });
       this.props.history.push("/")
     }
   }
@@ -62,7 +69,12 @@ class App extends React.Component {
   handleVerify = async () => {
     const currentUser = await verifyUser();
     if (currentUser) {
-      this.setState({ currentUser })
+      this.setState({
+        currentUser: {
+          id: currentUser.id,
+          username: currentUser.username,
+          email: currentUser.email
+      } })
     }
   }
 
@@ -77,6 +89,16 @@ class App extends React.Component {
     this.handleVerify()
 
   }
+
+  getUserInfo = () => {
+    this.setState({
+      userInfo: {
+        id: this.state.currentUser.id,
+        username: "",
+        email: ""
+      }
+    })
+  }
   /* /// ================================================================== */
 
 
@@ -84,31 +106,25 @@ class App extends React.Component {
   render() {
     const errorMessage = this.state.hasError
       ? <p>  Error</p> : null
+
+    
+    console.log(this.state.currentUser)
+
+
     return (
       <div className="app">
-        
-        <UserModal
-          handleLogout={this.handleLogout}
-          currentUser={this.state.currentUser}
-          handleLogin={this.handleLogin}
-          authErrorMessage={this.state.authErrorMessage}
-          handleRegister={this.handleRegister} />
-
-
-          
-        
-        {/* <Route path="/login" render={() => (
-          <LoginForm
+        <>
+          <UserModal
+            handleLogout={this.handleLogout}
+            currentUser={this.state.currentUser}
             handleLogin={this.handleLogin}
-            authErrorMessage={this.state.authErrorMessage} />)}
-        />
-        <Route path="/register" render={() => (
-          <RegisterForm
-            handleRegister={this.handleRegister}
-            authErrorMessage={this.state.authErrorMessage}
-          />)}
-        /> */}
-        <SubventContainer currentUser={this.state.currentUser} />
+            handleRegister={this.handleRegister} />
+
+          <SubventContainer currentUser={this.state.currentUser} />
+          <PostContainer currentUser={this.state.currentUser} />
+        </>
+
+
 
       </div>
     );

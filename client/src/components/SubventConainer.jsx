@@ -3,10 +3,10 @@ import { Route, withRouter } from 'react-router-dom';
 import {
   showAllSubvents, destroySubvent, postSubvent
 } from '../services/api-helper'
+import SubventList from './SubventList';
 import CreateSubvent from './CreateSubvent';
 import SingleSubvent from './SingleSubvent';
 import UpdateSubventForm from './UpdateSubventForm';
-import SubventList from './SubventList';
 
 
 class SubventConainer extends Component {
@@ -16,8 +16,9 @@ class SubventConainer extends Component {
     subventFormData: {
       vent_title: null,
       description: null,
-      image_url:null
-    }
+      user_id: this.props.currentUserId
+    },
+    user:this.props.currentUser
   }
 
   componentDidMount() {
@@ -54,7 +55,7 @@ class SubventConainer extends Component {
   // =============== Delete ===============
   DoYouWantTodestroySubvent = async () => {
     document.getElementById("modal").style.display = "block";
-    
+
   }
 
   destroySubvent = async (subventId) => {
@@ -67,7 +68,7 @@ class SubventConainer extends Component {
     this.props.history.push("/subvent")
   }
 
-  
+
 
   // =============== Update ===============
 
@@ -76,24 +77,30 @@ class SubventConainer extends Component {
     this.props.history.push("/subvent")
   }
   render() {
+    console.log(this.state.currentUser)
     return (
       <div>
+
+
         <Route exact path='/' render={() => (<SubventList subvents={this.state.subvents}
           getAllSubvents={this.getAllSubvents} />)} />
 
-        <Route exact path='/subvents' render={() => (<SubventList subvents={this.state.subvents} />)} />
+        <Route exact path='/subvents' render={() => (<SubventList subvents={this.state.subvents} getAllSubvents={this.getAllSubvents} />)} />
 
+        
         <Route exact path='/subvents/:subventId' render={(props) => {
           const subventId = props.match.params.subventId;
           const currentSubvent = this.state.subvents.find(subvent => {
+          
             return subvent.id === parseInt(subventId)
           })
+
           return <SingleSubvent
-            DoYouWantTodestroySubvent = {this.DoYouWantTodestroySubvent}
+            DoYouWantTodestroySubvent={this.DoYouWantTodestroySubvent}
             destroySubvent={this.destroySubvent}
             currentSubvent={currentSubvent}
             currentUser={this.props.currentUser}
-            subventId={subventId}
+            subventId = {subventId}
           />
         }} />
         <Route path='/subvents/new' render={() => (
@@ -102,6 +109,7 @@ class SubventConainer extends Component {
             handleSubventChange={this.handleSubventChange}
             handleSubventChange={this.handleSubventChange}
             subventFormData={this.state.subventFormData}
+            currentUser={this.props.currentUser}
           />
         )} />
 

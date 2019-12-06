@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, NavDropdown, Button, Modal, Show } from 'react-bootstrap'
-import LoginForm from './LoginForm';
+import { Navbar, NavDropdown } from 'react-bootstrap'
+
 
 
 
@@ -13,20 +12,21 @@ export default class Header extends React.Component {
 
 
   render() {
+    
     return (
 
       <>
         {this.props.currentUser
           ?
           <>
-            <Navbar bg="dark">
+            <Navbar className="nav" bg="dark">
               <Navbar.Brand href="/">Vent IT</Navbar.Brand>
               <Navbar.Toggle />
               <div className="User">
                 <Navbar.Collapse >
                   <Navbar.Text>
                     <NavDropdown title={this.props.currentUser.username} id="basic-nav-dropdown">
-                      <NavDropdown.Item href="#action/3.1">Test</NavDropdown.Item>
+                      <NavDropdown.Item href="#action/3.1">{this.props.currentUser.username}</NavDropdown.Item>
                       <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                       <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                       <NavDropdown.Divider />
@@ -40,7 +40,7 @@ export default class Header extends React.Component {
 
           :
           <>
-            <Navbar bg="dark">
+            <Navbar className="nav" bg="dark">
               <Navbar.Brand href="/">Vent IT</Navbar.Brand>
               <div className="User">
                 <button onClick={this.props.handleLoginClick}>

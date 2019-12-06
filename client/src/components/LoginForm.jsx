@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Form,Button } from 'react-bootstrap'
+import { Form, Button, Col, Modal } from 'react-bootstrap'
 
 
 
@@ -31,10 +31,10 @@ export default class LoginForm extends Component {
         }}>
 
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+
             <Form.Control
-              type="text"
               name="username"
+              type="text"
               placeholder="username"
               value={this.state.username}
               onChange={this.handleChange} />
@@ -46,16 +46,13 @@ export default class LoginForm extends Component {
               onChange={this.handleChange} />
 
           </Form.Group>
+          {/* <button id = "login-submit-button">Submit</button> */}
 
-          <Button variant="secondary" size="lg" active onClick={this.handleClose}>
-              Submit
-              </Button>
-          <Link id="register-link" to="/register">Not registered? Register here.</Link>
-          <br />
+          <Col md={{ span: 3, offset: 4 }}>
+            <button>Submit</button></Col> 
+           <br />
+
           <p>{this.props.authErrorMessage}</p>
-
-
-
         </form>
 
       </div>
