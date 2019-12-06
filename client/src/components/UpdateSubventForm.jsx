@@ -59,7 +59,7 @@ class UpdateSubventForm extends Component {
           <input
             className="input-fields"
             type="text"
-            name="name"
+            name="vent_title"
             id="name"
             value={vent_title}
             onChange={this.handleChange}

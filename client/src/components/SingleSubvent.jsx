@@ -6,7 +6,11 @@ import { Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap'
 
 class SingleSubvent extends Component {
   state = {
-    currentSubvent: null,
+    currentSubvent: {
+      id:null,
+      sub_id: null,
+
+    },
     currentPosts: [],
 
   }
@@ -31,7 +35,11 @@ class SingleSubvent extends Component {
 
     const currentSubvent = await showOneSubvent(this.props.subventId);
 
-    this.setState({ currentSubvent })
+    this.setState({
+      currentSubvent: {
+        id: this.props.subventId,
+        sub_id:currentSubvent.user_id
+    } })
 
     const posts = await showAllPostsInSubvent(this.props.subventId);
 
@@ -63,18 +71,18 @@ class SingleSubvent extends Component {
 
 
   render() {
-    console.log(this.state.currentUser)
-    console.log(this.state.currentSubvent)
+    console.log(parseInt(this.state.currentSubvent.id))
+    
 
     return (
       <div id="single-subvent">
         {
-          this.state.currentSubvent === this.props.currentUser ?
+          this.state.currentSubvent.sub_id === this.props.currentUserId ?
             <>
               <ButtonGroup vertical>
-                <DropdownButton as={ButtonGroup} title="Edit" id="bg-vertical-dropdown-1">
+                <DropdownButton as={ButtonGroup} title="Edit" id="bg-vertical-dropdown-1" href = {`/subvents/${this.state.currentSubvent.id}/edit`}>
                   <Dropdown.Item className="Delete" eventKey="2" onClick={() => {
-                    this.props.destroySubvent(this.state.currentSubvent)
+                    this.props.destroySubvent(this.state.currentSubvent.id)
                   }}>Delete This Sub-Vent?</Dropdown.Item>
                 </DropdownButton>
               </ButtonGroup>

@@ -4,6 +4,10 @@ const api = axios.create({
   baseURL: "http://localhost:3000/"
 })
 
+
+// const api = axios.create({
+//   baseURL: "https://ventit-api.herokuapp.com/"
+// })
 ///===========================================Auth===========================================///
 export const loginUser = async (loginData) => {
   const resp = await api.post('/login', loginData)
@@ -34,7 +38,7 @@ export const showAllSubvents = async () => {
 
 export const showOneSubvent = async (subventId) => {
   const resp = await api.get(`/subvents/${subventId}`)
-  return resp.data.user_id
+  return resp.data
 }
 
 

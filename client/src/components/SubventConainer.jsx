@@ -18,7 +18,7 @@ class SubventConainer extends Component {
       description: null,
       user_id: this.props.currentUserId
     },
-    user:this.props.currentUser
+    
   }
 
   componentDidMount() {
@@ -62,10 +62,11 @@ class SubventConainer extends Component {
     await destroySubvent(subventId);
     this.setState(prevState => ({
       subvents: prevState.subvents.filter(subvent => {
+        console.log(subvent.id)
         return subvent.id !== subventId
       })
     }))
-    this.props.history.push("/subvent")
+    this.props.history.push("/subvents")
   }
 
 
@@ -74,10 +75,11 @@ class SubventConainer extends Component {
 
   updateSubvent = async () => {
     this.getAllSubvents()
-    this.props.history.push("/subvent")
+    this.props.history.push("/subvents")
   }
   render() {
-    console.log(this.state.currentUser)
+
+    
     return (
       <div>
 
@@ -91,15 +93,14 @@ class SubventConainer extends Component {
         <Route exact path='/subvents/:subventId' render={(props) => {
           const subventId = props.match.params.subventId;
           const currentSubvent = this.state.subvents.find(subvent => {
-          
             return subvent.id === parseInt(subventId)
           })
-
+          {console.log(subventId)}
           return <SingleSubvent
             DoYouWantTodestroySubvent={this.DoYouWantTodestroySubvent}
             destroySubvent={this.destroySubvent}
             currentSubvent={currentSubvent}
-            currentUser={this.props.currentUser}
+            currentUserId={this.props.currentUserId}
             subventId = {subventId}
           />
         }} />

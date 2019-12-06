@@ -108,7 +108,7 @@ class App extends React.Component {
       ? <p>  Error</p> : null
 
     
-    console.log(this.state.currentUser)
+    
 
 
     return (
@@ -120,7 +120,7 @@ class App extends React.Component {
             handleLogin={this.handleLogin}
             handleRegister={this.handleRegister} />
 
-          <SubventContainer currentUser={this.state.currentUser} />
+          <SubventContainer currentUserId={this.state.currentUser.id} />
           <PostContainer currentUser={this.state.currentUser} />
         </>
 
