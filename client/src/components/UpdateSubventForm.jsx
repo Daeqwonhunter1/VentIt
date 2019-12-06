@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-
+import {updateSubvent} from '../services/api-helper'
 
 class UpdateSubventForm extends Component {
   state = {
@@ -31,11 +31,13 @@ class UpdateSubventForm extends Component {
     this.setState({ [name]: value })
   }
 
-  updateSubvent = async (subventId) => {
+  updateSubvent = async (subventId, subventData) => {
+    const updated = await updateSubvent(subventId, subventData)
     this.setState({
       vent_title:null,
       description:null
     })
+   
     this.props.getAllSubvents()
     this.props.history.push(`/subvents/${subventId}`)
   }
@@ -47,6 +49,8 @@ class UpdateSubventForm extends Component {
   render() {
     const { vent_title,
       description } = this.state;
+    console.log(this.props.subvents)
+    console.log(this.state)
     return (
       <div id="update-wishlist-div">
         <form className="create-form" onSubmit={(e) => {
