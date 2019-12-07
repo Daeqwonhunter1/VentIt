@@ -39,20 +39,22 @@ class SingleSubvent extends Component {
       currentSubvent: {
         id: this.props.subventId,
         sub_id:currentSubvent.user_id
-    } })
-
-    const posts = await showAllPostsInSubvent(this.props.subventId);
+      }
+    })
+    
+  }
+  setPostsInSubvents = async () => {
+    const posts = await showAllPostsInSubvent(this.state.currentSubvent.id);
 
     const newPosts = posts.filter(post =>
       post.subvent_id === parseInt(this.props.subventId))
 
     this.setState({ posts: newPosts })
-  }
-
+}
   setCurrentPostlist = async () => {
 
     const allPosts = await showAllPostsInSubvent(this.props.subventId);
-
+ 
     const currentPosts = allPosts.filter(post =>
       post.subvent_id === parseInt(this.props.subventId))
 
@@ -71,8 +73,7 @@ class SingleSubvent extends Component {
 
 
   render() {
-    console.log(parseInt(this.state.currentSubvent.id))
-    
+   
 
     return (
       <div id="single-subvent">
@@ -92,7 +93,7 @@ class SingleSubvent extends Component {
         }
 
         <PostList
-          items={this.state.currentItems}
+          posts={this.state.currentPosts}
           destroyItem={this.destroyItem}
           currentUser={this.props.currentUser}
         />

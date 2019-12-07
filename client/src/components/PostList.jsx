@@ -7,20 +7,30 @@ import {
 
 class ItemList extends Component {
   state = {
-    currentUser: ""
+    currentUser: {
+      id: null,
+      username: null,
+      email: null,
+      
+    }
   }
 
   async componentDidMount() {
     const currentUser = await verifyUser();
     this.setState({
-      currentUser
+      currentUser: {
+        id: currentUser.id,
+        username: currentUser.username,
+        email: currentUser.email,
+        
+      }
     })
   }
 
 
   render() {
     const { posts } = this.props
-    const { currentUser } = this.state
+    console.log(this.props)
 
     return (
       <div id="item-list">

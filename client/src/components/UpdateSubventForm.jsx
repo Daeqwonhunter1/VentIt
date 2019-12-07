@@ -49,8 +49,6 @@ class UpdateSubventForm extends Component {
   render() {
     const { vent_title,
       description } = this.state;
-    console.log(this.props.subvents)
-    console.log(this.state)
     return (
       <div id="update-wishlist-div">
         <form className="create-form" onSubmit={(e) => {

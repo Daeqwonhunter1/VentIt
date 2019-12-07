@@ -21,9 +21,7 @@ class SubventList extends Component {
     })
   }
 
-  // descriptionModal = () => {
-  //   document.getElementsByClassName("description-modal").style.display = "block"
-  // }
+  
   render() {
     const { subvents } = this.props
     this.setState = {
@@ -37,7 +35,7 @@ class SubventList extends Component {
 
         <div id="subvents-list" key ="vfsrtyguhij">
           {subvents && subvents.map(subvent =>
-            <div id="subvents" key = "test">
+            <div id="subvents" key = {subvent.id}>
 
 
               <Card className="Cards" style={{ width: '40rem', height: '20rem' }}>

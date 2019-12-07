@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { withRouter } from 'react-router-dom';
-
 import {
   loginUser,
   registerUser,
@@ -10,7 +9,6 @@ import {
 import SubventContainer from './components/SubventConainer'
 import UserModal from './components/UserModal';
 import PostContainer from './components/PostContainer';
-import Header from './components/Header'
 
 class App extends React.Component {
   constructor(props) {
