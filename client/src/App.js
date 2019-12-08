@@ -114,7 +114,9 @@ class App extends React.Component {
         <>
           <UserModal
             handleLogout={this.handleLogout}
-            currentUser={this.state.currentUser}
+            currentUserId={this.state.currentUser.id}
+            currentUserName={this.state.currentUser.username}
+            currentUserEmail={this.state.currentUser.email}
             handleLogin={this.handleLogin}
             handleRegister={this.handleRegister} />
 
