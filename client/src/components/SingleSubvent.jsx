@@ -38,13 +38,15 @@ class SingleSubvent extends Component {
     this.setState({
       currentSubvent: {
         id: this.props.subventId,
-        sub_id:currentSubvent.user_id
+        user_id:currentSubvent.user_id
       }
     })
     
   }
+
+  
   setPostsInSubvents = async () => {
-    const posts = await showAllPostsInSubvent(this.state.currentSubvent.id);
+    const posts = await showAllPostsInSubvent(this.props.subventId);
 
     const newPosts = posts.filter(post =>
       post.subvent_id === parseInt(this.props.subventId))
@@ -78,7 +80,7 @@ class SingleSubvent extends Component {
     return (
       <div id="single-subvent">
         {
-          this.state.currentSubvent.sub_id === this.props.currentUserId ?
+          this.state.currentSubvent.user_id === this.props.currentUserId ?
             <>
               <ButtonGroup vertical>
                 <DropdownButton as={ButtonGroup} title="Edit" id="bg-vertical-dropdown-1" href = {`/subvents/${this.state.currentSubvent.id}/edit`}>

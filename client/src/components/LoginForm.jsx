@@ -28,6 +28,7 @@ export default class LoginForm extends Component {
             username: "",
             password: ""
           })
+          console.log(this.state)
         }}>
 
           <Form.Group controlId="formBasicEmail">

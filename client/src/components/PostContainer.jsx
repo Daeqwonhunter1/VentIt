@@ -11,15 +11,13 @@ class PostContainer extends Component {
     posts: []
   }
 
-  componentDidMount() {
-    this.getAllPosts();
-  }
+  
    // =============== Read ===============
 
-   getAllPosts = async () => {
-    const posts = await showAllPostsInSubvent()
-    this.setState({ posts })
-   }
+  //  getAllPosts = async () => {
+  //   const posts = await showAllPostsInSubvent()
+  //   this.setState({ posts })
+  //  }
   
   // =============== Create ===============
 
@@ -30,7 +28,7 @@ class PostContainer extends Component {
       posts: [...prevState.posts, newPosts]
     }))
 
-    this.props.history.push(`/subvent/${subventId}`)
+    this.props.history.push(`/subvents/${subventId}`)
   }
 
 
@@ -38,12 +36,12 @@ class PostContainer extends Component {
   render() {
     return (
       <div>
-          <Route path='/subvents/:subventId/posts/create_post' render={(props) => (
+          {/* <Route path='/subvents/:subventId/posts/create_post' render={(props) => (
           <CreatePostForm
             createPost={this.createPost}
             currentSubventId={props.match.params.subventId}
           />
-        )} />
+        )} /> */}
 
         {/* <Route path='/subvents/:subventId/post/:postId/edit' render={(props) => (
           <UpdateItemForm

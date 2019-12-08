@@ -90,7 +90,7 @@ class SubventConainer extends Component {
         <Route exact path='/subvents' render={() => (<SubventList subvents={this.state.subvents} getAllSubvents={this.getAllSubvents} />)} />
 
         
-        <Route exact path='/subvents/:subventId' render={(props) => {
+        <Route exact path='/subvents/:subventId/posts' render={(props) => {
           const subventId = props.match.params.subventId;
           const currentSubvent = this.state.subvents.find(subvent => {
             return subvent.id === parseInt(subventId)

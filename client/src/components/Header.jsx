@@ -16,7 +16,7 @@ export default class Header extends React.Component {
     return (
 
       <>
-        {this.props.currentUser
+        {this.props.currentUserName
           ?
           <>
             <Navbar className="nav" bg="dark">
@@ -25,8 +25,8 @@ export default class Header extends React.Component {
               <div className="User">
                 <Navbar.Collapse >
                   <Navbar.Text>
-                    <NavDropdown title={this.props.currentUser.username} id="basic-nav-dropdown">
-                      <NavDropdown.Item href="#action/3.1">{this.props.currentUser.username}</NavDropdown.Item>
+                    <NavDropdown title={this.props.currentUserName} id="basic-nav-dropdown">
+                      <NavDropdown.Item href="#action/3.1">{this.props.currentUserId}</NavDropdown.Item>
                       <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                       <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                       <NavDropdown.Divider />

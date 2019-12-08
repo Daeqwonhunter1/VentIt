@@ -36,7 +36,13 @@ class App extends React.Component {
       this.setState({ authErrorMessage: currentUser.error })
       console.log("i don't work")
     } else {
-      this.setState({ currentUser })
+      this.setState({
+        currentUser: {
+          id: currentUser.id,
+          username: currentUser.username,
+          email: currentUser.email,
+          password:currentUser.password_digest
+      } })
       this.props.history.push("/")
     }
   }
@@ -58,7 +64,8 @@ class App extends React.Component {
         currentUser: {
           id: currentUser.id,
           username: currentUser.username,
-          email: currentUser.email
+          email: currentUser.email,
+          password:currentUser.password_digest
       } });
       this.props.history.push("/")
     }
@@ -71,7 +78,8 @@ class App extends React.Component {
         currentUser: {
           id: currentUser.id,
           username: currentUser.username,
-          email: currentUser.email
+          email: currentUser.email,
+          password:currentUser.password_digest
       } })
     }
   }
