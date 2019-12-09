@@ -3,13 +3,15 @@ import { Link, withRouter } from 'react-router-dom';
 import PostList from './PostList'
 import { showAllPostsInSubvent, showOneSubvent, destroyPostInSubvent } from '../services/api-helper'
 import { Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap'
+import PostContainer from './PostContainer'
 
 class SingleSubvent extends Component {
   state = {
     currentSubvent: {
       id:null,
-      sub_id: null,
-
+      vent_title: null,
+      description: null,
+      user_id:null
     },
     currentPosts: [],
 
@@ -27,36 +29,31 @@ class SingleSubvent extends Component {
   // }
 
 
-  async componentDidMount() {
-    await this.setCurrentSubvent();
-    await this.setCurrentPostlist();
-  }
+
   setCurrentSubvent = async () => {
 
     const currentSubvent = await showOneSubvent(this.props.subventId);
-
     this.setState({
       currentSubvent: {
-        id: this.props.subventId,
+        id:currentSubvent.id,
+        vent_title: currentSubvent.vent_title,
+        description: currentSubvent.description,
         user_id:currentSubvent.user_id
-      }
-    })
-    
-  }
+    } })
 
-  
-  setPostsInSubvents = async () => {
     const posts = await showAllPostsInSubvent(this.props.subventId);
-
     const newPosts = posts.filter(post =>
-      post.subvent_id === parseInt(this.props.subventId))
+      post.subventId === parseInt(this.props.subventId))
 
     this.setState({ posts: newPosts })
-}
+  }
+
+
   setCurrentPostlist = async () => {
 
     const allPosts = await showAllPostsInSubvent(this.props.subventId);
- 
+   
+
     const currentPosts = allPosts.filter(post =>
       post.subvent_id === parseInt(this.props.subventId))
 
@@ -64,6 +61,11 @@ class SingleSubvent extends Component {
   }
 
 
+
+  async componentDidMount() {
+    await this.setCurrentSubvent();
+    await this.setCurrentPostlist();
+  }
 
 
   async componentDidUpdate(prevProps) {
@@ -74,31 +76,45 @@ class SingleSubvent extends Component {
   }
 
 
+
   render() {
-   
+    
+    const { currentSubvent } = this.state;
+    console.log(this.state.currentSubvent)
 
     return (
       <div id="single-subvent">
-        {
-          this.state.currentSubvent.user_id === this.props.currentUserId ?
-            <>
-              <ButtonGroup vertical>
-                <DropdownButton as={ButtonGroup} title="Edit" id="bg-vertical-dropdown-1" href = {`/subvents/${this.state.currentSubvent.id}/edit`}>
-                  <Dropdown.Item className="Delete" eventKey="2" onClick={() => {
-                    this.props.destroySubvent(this.state.currentSubvent.id)
-                  }}>Delete This Sub-Vent?</Dropdown.Item>
-                </DropdownButton>
-              </ButtonGroup>
-            </>
-            :
-            false
-        }
 
+        {currentSubvent && (
+          <>
+            {currentSubvent.vent_title}
+
+            {
+              currentSubvent.user_id === this.props.currentUserId ?
+                <>
+                  <DropdownButton id="dropdown-basic-button" title="Options" >
+                    <Dropdown.Item href={`/subvents/${this.state.currentSubvent.id}/edit`}>Edit Subvent</Dropdown.Item>
+                    <Dropdown.Item href={`/subvents/${this.state.currentSubvent.id}/posts/create_post`}>Add Post</Dropdown.Item>
+                    <Dropdown.Item className="Delete" eventKey="2" onClick={() => {
+                      this.props.destroySubvent(this.state.currentSubvent.id)
+                    }}>Delete This Sub-Vent?</Dropdown.Item>
+                  </DropdownButton>
+
+                </>
+                :
+                false
+            }
+          </>
+        )}
         <PostList
           posts={this.state.currentPosts}
           destroyItem={this.destroyItem}
-          currentUser={this.props.currentUser}
+          currentUser={this.props.currentUserId}
+          currentSubvent = {this.state.currentSubvent}
         />
+    
+        {/* <PostContainer
+        /> */}
 
       </div>
     )

@@ -11,7 +11,7 @@ class ItemList extends Component {
       id: null,
       username: null,
       email: null,
-      
+
     }
   }
 
@@ -22,15 +22,19 @@ class ItemList extends Component {
         id: currentUser.id,
         username: currentUser.username,
         email: currentUser.email,
-        
+
       }
     })
   }
 
-//// 
+  //// Make CRUD FOR POSTS HERE /////
+  ///Take things from postContainer////
+  ///Have a good day at work H.M.T/////
+
+
   render() {
     const { posts } = this.props
-    console.log(this.props)
+    console.log(this.props.currentSubvent.id)
 
     return (
       <div id="item-list">
@@ -38,19 +42,16 @@ class ItemList extends Component {
           <div className="item" key={post.id}>
             <h3>{post.post_title}</h3>
             <p>{post.post_content}</p>
-
-            {/* {currentUser && currentUser.id === post.userId && (
-              <>
-                <button id={postid}
-                  onClick={() => { this.props.destroyItem(post.subventId, postid) }}>
-                  DESTROY {post.name}</button>
-                <Link to={`/wishlists/${post.subventId}/items/${post.id}/edit`}><button>Edit Item</button></Link>
-              </>
-             )}  */}
-
           </div>
         )}
 
+
+
+        {this.props.currentUser && (
+          <>
+            <Link to={`/subvents/${this.props.currentSubvent.id}/posts/create_post`}><button>Create Post</button></Link>
+          </>
+        )}
       </div>
     )
   }

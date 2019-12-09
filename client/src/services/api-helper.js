@@ -76,8 +76,8 @@ export const postNewPostInSubvent = async (subventId, postData) => {
 }
 
 
-export const postNewCommentInPost = async (subventId,postId,postData) => {
-  const resp = await api.post(`/subvents/${subventId}/posts/${postId}/comments`, postData)
+export const postNewCommentInPost = async (subventId,postId,commentData) => {
+  const resp = await api.post(`/subvents/${subventId}/posts/${postId}/comments`, commentData)
   return resp.data
 }
 

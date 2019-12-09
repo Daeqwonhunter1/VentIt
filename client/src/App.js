@@ -129,7 +129,7 @@ class App extends React.Component {
             handleRegister={this.handleRegister} />
 
           <SubventContainer currentUserId={this.state.currentUser.id} />
-          <PostContainer currentUser={this.state.currentUser} />
+          
         </>
 
 

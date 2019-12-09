@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_185341) do
     t.text "post_content"
     t.bigint "upvotes"
     t.bigint "downvotes"
-    t.bigint "subvent_id", null: false
+    t.bigint "subvent_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

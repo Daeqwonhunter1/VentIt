@@ -7,6 +7,7 @@ import SubventList from './SubventList';
 import CreateSubvent from './CreateSubvent';
 import SingleSubvent from './SingleSubvent';
 import UpdateSubventForm from './UpdateSubventForm';
+import PostContainer from './PostContainer';
 
 
 class SubventConainer extends Component {
@@ -95,7 +96,6 @@ class SubventConainer extends Component {
           const currentSubvent = this.state.subvents.find(subvent => {
             return subvent.id === parseInt(subventId)
           })
-          {console.log(subventId)}
           return <SingleSubvent
             DoYouWantTodestroySubvent={this.DoYouWantTodestroySubvent}
             destroySubvent={this.destroySubvent}
@@ -124,6 +124,10 @@ class SubventConainer extends Component {
             getAllSubvents={this.getAllSubvents}
           />
         )} />
+
+        <PostContainer
+          subventId = {this.props.match.params.subventId}
+        />
       </div>
     );
   }

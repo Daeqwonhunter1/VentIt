@@ -5,7 +5,7 @@ class SubventsController < ApplicationController
   # GET /subvents
   def index
     @subvents = Subvent.all
-    render json: @subvents, include: {post: {include: :comments}}, status: :ok
+    render json: @subvents, include: {posts: {include: :comments}}, status: :ok
   end
 
   # GET /subvents/1
@@ -47,6 +47,6 @@ class SubventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def subvent_params
-      params.require(:subvent).permit(:vent_title, :description, :image_url, :subvent_upvotes, :subvent_downvotes, :members, :user_id)
+      params.require(:subvent).permit(:vent_title, :description, :image_url, :subvent_upvotes, :subvent_downvotes, :members,:subvent_id, :user_id)
     end
 end

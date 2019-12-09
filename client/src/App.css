@@ -133,3 +133,7 @@ body {
 .Delete {
   background-color: red;
 }
+
+.Edit {
+  width:100px;
+}

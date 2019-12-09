@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
   before_action :authorize_request, except: %i[index show]
+  
 
   # GET /posts
   def index
@@ -10,15 +11,18 @@ class PostsController < ApplicationController
   end
 
   def show
-    @posts = Post.find(params[:id])
-    render json: @posts
+    @post = Post.find(params[:id])
+    render json: @post
   end
 
   def create
+    @subvent = Subvent.find(params[:subvent_id])
     @post = Post.new(post_params)
-    
+    @subvent.posts << @post
+    @post.user = @current_user
+    byebug
     if @post.save
-      render json: @post, status: :created, location: @post
+      render json: @post, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -27,6 +31,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.user == @current_user
+
       if @post.update(post_params)
         render json: @post
       else
@@ -54,7 +59,7 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:post_title, :post_content, :upvotes, :downvotes )
+      params.require(:post).permit(:post_title, :post_content, :upvotes, :downvotes, :user_id ,:subvent_id)
     end
 end
 
