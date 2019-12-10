@@ -109,8 +109,8 @@ export const destroySubvent = async (subventId) => {
   return resp.data
 }
 
-export const destroyPostInSubvent = async (subventId, postId) => {
-  const resp = await api.delete(`/subvents/${subventId}/posts/${postId}`)
+export const destroyPostInSubvent = async (subventUrl, postId) => {
+  const resp = await api.delete(`${subventUrl}/${postId}`)
   return resp.data
 }
 

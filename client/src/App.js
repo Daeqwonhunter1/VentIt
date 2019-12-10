@@ -8,7 +8,7 @@ import {
 } from './services/api-helper';
 import SubventContainer from './components/SubventConainer'
 import UserModal from './components/UserModal';
-import PostContainer from './components/PostContainer';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -96,26 +96,11 @@ class App extends React.Component {
 
   }
 
-  getUserInfo = () => {
-    this.setState({
-      userInfo: {
-        id: this.state.currentUser.id,
-        username: "",
-        email: ""
-      }
-    })
-  }
   /* /// ================================================================== */
 
 
 
   render() {
-    const errorMessage = this.state.hasError
-      ? <p>  Error</p> : null
-
-    
-    
-
 
     return (
       <div className="app">
@@ -128,7 +113,8 @@ class App extends React.Component {
             handleLogin={this.handleLogin}
             handleRegister={this.handleRegister} />
 
-          <SubventContainer currentUserId={this.state.currentUser.id} />
+          <SubventContainer currentUserId={this.state.currentUser.id}
+            currentUserName={this.state.currentUser.username}/>
           
         </>
 

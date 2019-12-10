@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import {updateSubvent} from '../services/api-helper'
+import {updatePostInSubvent} from '../services/api-helper'
 
-class UpdateSubventForm extends Component {
+class UpdatePostForm extends Component {
   state = {
-    vent_title: "",
-    description: "",
+    post_title: "",
+    post_content: "",
   }
   setFormData = () => {
-    if (this.props.subvents.length) {
+    if (this.props.posts.length) {
       const {
-        vent_title,
-        description,
-      } = this.props.subvents.find(subvent => {
-        return subvent.id === parseInt(this.props.subventId)
+        post_title,
+        post_content,
+      } = this.props.posts.find(post => {
+        return post.id === parseInt(this.props.postId)
       })
       this.setState({
-        vent_title,
-        description,
+        post_title,
+        post_content,
 
       })
     }
@@ -31,50 +31,51 @@ class UpdateSubventForm extends Component {
     this.setState({ [name]: value })
   }
 
-  updateSubvent = async (subventId, subventData) => {
+  updatePost = async (subventId, postId, postData) => {
     // eslint-disable-next-line
-    const updated = await updateSubvent(subventId, subventData)
+    const updated = await updatePostInSubvent(subventId,postId, postData)
     this.setState({
-      vent_title:null,
-      description:null
+      post_title:null,
+      post_content:null
     })
    
-    this.props.getAllSubvents()
-    this.props.history.push(`/subvents/${subventId}`)
+    this.props.getAllPosts(this.props.subventId)
+    this.props.history.push(`/subvents/${this.props.subventId}/posts`)
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.subvents !== this.props.subvents) {
+    if (prevProps.posts !== this.props.posts) {
       this.setFormData();
     }
   }
   render() {
-    const { vent_title,
-      description } = this.state;
+    const { post_title,
+      post_content } = this.state;
+    console.log(this.props)
     return (
       <div id="update-wishlist-div">
         <form className="create-form" onSubmit={(e) => {
           e.preventDefault();
-          this.updateSubvent(this.props.subventId, this.state);
+          this.updatePost(this.props.subventId,this.props.postId, this.state);
         }}>
           <h2 className="update-header">Update Wishlist</h2>
 
-          {/* <label htmlFor="name">name</label> */}
+       
           <input
             className="input-fields"
             type="text"
-            name="vent_title"
+            name="post_title"
             id="name"
-            value={vent_title}
+            value={post_title}
             onChange={this.handleChange}
           />
           <br />
-          {/* <label htmlFor="description">description</label> */}
+      
           <input
             className="input-fields"
             type="text"
-            name="description"
-            id="description"
-            value={description}
+            name="post_content"
+            id="post_content"
+            value={post_content}
             onChange={this.handleChange}
           />
           <br />
@@ -84,4 +85,4 @@ class UpdateSubventForm extends Component {
     )
   }
 }
-export default withRouter(UpdateSubventForm)
+export default withRouter(UpdatePostForm)

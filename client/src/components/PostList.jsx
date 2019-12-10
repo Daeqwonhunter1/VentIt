@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import {
-  verifyUser
+  verifyUser, destroyPostInSubvent
 } from '../services/api-helper'
+import { Carousel } from 'react-bootstrap';
 
 
-class ItemList extends Component {
+class PostList extends Component {
   state = {
+    posts: [],
     currentUser: {
       id: null,
       username: null,
@@ -27,33 +29,52 @@ class ItemList extends Component {
     })
   }
 
-  //// Make CRUD FOR POSTS HERE /////
-  ///Take things from postContainer////
-  ///Have a good day at work H.M.T/////
+  destroyPost = async (subventId, postId) => {
+    await destroyPostInSubvent(subventId, postId);
+    this.setState(prevState => ({
+      posts: prevState.posts.filter(post => {
+        return post.id !== postId
+      })
+    }))
+    this.props.history.push(`/subvents`)
+  }
+
 
 
   render() {
     const { posts } = this.props
-    console.log(this.props.currentSubvent.id)
+    console.log(this.props)
 
     return (
       <div id="item-list">
-        {posts && posts.map(post =>
-          <div className="item" key={post.id}>
-            <h3>{post.post_title}</h3>
-            <p>{post.post_content}</p>
-          </div>
-        )}
+        <Carousel>
+          {posts && posts.map(post =>
 
-
-
-        {this.props.currentUser && (
-          <>
-            <Link to={`/subvents/${this.props.currentSubvent.id}/posts/create_post`}><button>Create Post</button></Link>
-          </>
-        )}
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                alt={post.alt}
+              />
+              <>
+                <Carousel.Caption>
+                  <h3>{post.post_title}</h3>
+                  <p>{post.post_content}</p>
+                </Carousel.Caption>
+              {this.state.currentUser.id === post.user_id ?
+                <>
+                  <Link to={`${this.props.location.pathname}/${post.id}/edit`}> <button>Edit</button></Link>
+                  <button onClick={() => { this.destroyPost(this.props.location.pathname, post.id) }}>Delete</button>
+                </>
+                :
+                false
+              }
+              </>
+              </Carousel.Item>
+          )}
+        </Carousel>
       </div>
     )
   }
 }
-export default withRouter(ItemList);
+export default withRouter(PostList);

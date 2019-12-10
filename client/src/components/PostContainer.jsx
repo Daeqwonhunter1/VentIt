@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
-import PostList from './PostList'
+
 import CreatePostForm from './CreatePostForm'
 import { showAllPostsInSubvent, postNewPostInSubvent } from '../services/api-helper';
+import UpdatePostForm from './UpdatePostForm'
+import CommentList from './CommentList'
 
 class ItemContainer extends Component {
   constructor() {
@@ -13,37 +15,23 @@ class ItemContainer extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.getAllPosts(this.props.subventId);
-
-  // }
+  
 
   // // // =============== Read ===============
 
-  // getAllPosts = async (subventId) => {
-  //   const posts = await showAllPostsInSubvent(subventId)
-  //   console.log(posts)
-  //   this.setState({ posts })
-  // }
+  getAllPosts = async (subventId) => {
+    const posts = await showAllPostsInSubvent(subventId)
+    console.log(posts)
+    this.setState({ posts })
+  }
 
 
-  // // =============== Create ===============
-
-  // createPost = async (id, newPost) => {
-
-  //   const newPosts = await postNewPostInSubvent(id, newPost);
-  //   console.log(newPosts)
-  //   this.setState(prevState => ({
-  //     posts: [...prevState.posts, newPosts]
-  //   }))
-
-  //   this.props.history.push(`/subvents/${id}`)
-  // }
 
   createPost = async (subventId, postData) => {
-    console.log(subventId,postData)
+    
+    // eslint-disable-next-line
     const post = await postNewPostInSubvent(subventId, postData);
-
+    this.props.history.push(`/subvents/${subventId}/posts`)
   }
 
   render() {
@@ -54,22 +42,27 @@ class ItemContainer extends Component {
           <CreatePostForm
             currentSubventId = {props.match.params.subventId}
             createPost={this.createPost}
-            currentSubventId={props.match.params.subventId}
+           
           />
         )} />
+{/* 
+        <Route path='/subvents/:subventId/posts/:postId/comments' render={(props) => (
+          <CommentList
+            currentSubventId={props.match.params.subventId}
+            postId={props.match.params.postId}/>
+        )}/> */}
 
-
-
-        {/* <Route path='/wishlists/:wishlistId/items/:itemId/edit' render={(props) => (
-          <UpdateItemForm
-            itemId={props.match.params.itemId}
-            wishlistId={props.match.params.wishlistId}
-            updateItems={this.updateItems}
-            handleItemChange={this.handleItemChange}
-            ItemFormData={this.state.ItemFormData}
-            items={this.state.items}
+        <Route path='/subvents/:subventId/posts/:postId/edit' render={(props) => (
+          <UpdatePostForm
+            postId={props.match.params.postId}
+            subventId={props.match.params.subventId}
+            updatePosts={this.updatePosts}
+            handlePostChange={this.handlePostChange}
+            PostFormData={this.state.PostFormData}
+            posts={this.state.posts}
+            getAllPosts = {this.getAllPosts}
           />
-        )} /> */}
+        )} />
       </div>
     )
   }

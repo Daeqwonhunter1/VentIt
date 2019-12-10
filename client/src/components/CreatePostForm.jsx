@@ -40,6 +40,8 @@ class CreatePostForm extends Component {
           <button className="create-button" >
             Create
         </button>
+          
+          
         </form>
       </div>
     )

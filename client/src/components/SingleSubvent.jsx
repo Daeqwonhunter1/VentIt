@@ -1,33 +1,24 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import {  withRouter } from 'react-router-dom';
 import PostList from './PostList'
-import { showAllPostsInSubvent, showOneSubvent, destroyPostInSubvent } from '../services/api-helper'
-import { Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap'
-import PostContainer from './PostContainer'
+import { showAllPostsInSubvent, showOneSubvent } from '../services/api-helper'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
+
 
 class SingleSubvent extends Component {
   state = {
     currentSubvent: {
-      id:null,
+      id: null,
       vent_title: null,
       description: null,
-      user_id:null
+      user_id: null
     },
     currentPosts: [],
 
   }
 
 
-  // destroyPost = async (subventId, postId) => {
-  //   await destroyPostInSubvent(subventId, postId);
-  //   this.setState(prevState => ({
-  //     currentPosts: prevState.currentPosts.filter(posts => (
-  //       postsid !== parseInt(post.id)
-  //     ))
-  //   }))
-  //   this.props.history.push(`/subvents/${subventId}`)
-  // }
-
+  
 
 
   setCurrentSubvent = async () => {
@@ -35,11 +26,12 @@ class SingleSubvent extends Component {
     const currentSubvent = await showOneSubvent(this.props.subventId);
     this.setState({
       currentSubvent: {
-        id:currentSubvent.id,
+        id: currentSubvent.id,
         vent_title: currentSubvent.vent_title,
         description: currentSubvent.description,
-        user_id:currentSubvent.user_id
-    } })
+        user_id: currentSubvent.user_id
+      }
+    })
 
     const posts = await showAllPostsInSubvent(this.props.subventId);
     const newPosts = posts.filter(post =>
@@ -52,7 +44,7 @@ class SingleSubvent extends Component {
   setCurrentPostlist = async () => {
 
     const allPosts = await showAllPostsInSubvent(this.props.subventId);
-   
+
 
     const currentPosts = allPosts.filter(post =>
       post.subvent_id === parseInt(this.props.subventId))
@@ -78,9 +70,9 @@ class SingleSubvent extends Component {
 
 
   render() {
-    
+
     const { currentSubvent } = this.state;
-    console.log(this.state.currentSubvent)
+
 
     return (
       <div id="single-subvent">
@@ -102,21 +94,24 @@ class SingleSubvent extends Component {
 
                 </>
                 :
-                false
-            }
+                <DropdownButton id="dropdown-basic-button" title="Options" >
+                <Dropdown.Item href={`/subvents/${this.state.currentSubvent.id}/posts/create_post`}>Add Post</Dropdown.Item>
+                </DropdownButton>
+            } 
           </>
-        )}
+    )
+  }
         <PostList
           posts={this.state.currentPosts}
           destroyItem={this.destroyItem}
           currentUser={this.props.currentUserId}
-          currentSubvent = {this.state.currentSubvent}
-        />
-    
-        {/* <PostContainer
+          // currentSubvent={this.state.currentSubvent}
+/>
+
+{/* <PostContainer
         /> */}
 
-      </div>
+      </div >
     )
   }
 }

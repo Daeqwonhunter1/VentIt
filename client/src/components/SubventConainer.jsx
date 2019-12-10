@@ -8,6 +8,8 @@ import CreateSubvent from './CreateSubvent';
 import SingleSubvent from './SingleSubvent';
 import UpdateSubventForm from './UpdateSubventForm';
 import PostContainer from './PostContainer';
+import { Toast } from 'react-bootstrap'
+
 
 
 class SubventConainer extends Component {
@@ -19,7 +21,7 @@ class SubventConainer extends Component {
       description: null,
       user_id: this.props.currentUserId
     },
-    
+    created: false
   }
 
   componentDidMount() {
@@ -50,6 +52,9 @@ class SubventConainer extends Component {
   createSubvent = async () => {
     await postSubvent(this.state.subventFormData);
     this.getAllSubvents()
+    this.setState({
+      created: true
+    })
     this.props.history.push("/subvents")
   }
 
@@ -70,7 +75,11 @@ class SubventConainer extends Component {
     this.props.history.push("/subvents")
   }
 
-
+  toggleOff = async () => {
+    this.setState({
+      created: false
+    })
+  }
 
   // =============== Update ===============
 
@@ -80,7 +89,7 @@ class SubventConainer extends Component {
   }
   render() {
 
-    
+
     return (
       <div>
 
@@ -90,7 +99,7 @@ class SubventConainer extends Component {
 
         <Route exact path='/subvents' render={() => (<SubventList subvents={this.state.subvents} getAllSubvents={this.getAllSubvents} />)} />
 
-        
+
         <Route exact path='/subvents/:subventId/posts' render={(props) => {
           const subventId = props.match.params.subventId;
           const currentSubvent = this.state.subvents.find(subvent => {
@@ -101,18 +110,18 @@ class SubventConainer extends Component {
             destroySubvent={this.destroySubvent}
             currentSubvent={currentSubvent}
             currentUserId={this.props.currentUserId}
-            subventId = {subventId}
+            subventId={subventId}
           />
         }} />
         <Route path='/subvents/new' render={() => (
           <CreateSubvent
             createSubvent={this.createSubvent}
             handleSubventChange={this.handleSubventChange}
-            handleSubventChange={this.handleSubventChange}
             subventFormData={this.state.subventFormData}
             currentUser={this.props.currentUser}
           />
         )} />
+     
 
         <Route path='/subvents/:subventId/edit' render={(props) => (
           <UpdateSubventForm
@@ -126,9 +135,28 @@ class SubventConainer extends Component {
         )} />
 
         <PostContainer
-          subventId = {this.props.match.params.subventId}
+          subventId={this.props.match.params.subventId}
         />
-      </div>
+
+
+{/* 
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+        }}>
+          <Toast show={this.state.created} onClose={this.toggleOff} delay={5000} autohide>
+            <Toast.Header>
+            
+              <strong className="mr-auto">Subvent Created</strong>
+             
+            </Toast.Header>
+            <Toast.Body>{this.props.currentUserName} created a subvent</Toast.Body>
+          </Toast>
+
+          
+        </div> */}
+      </div >
     );
   }
 }

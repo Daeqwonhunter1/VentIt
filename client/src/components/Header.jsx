@@ -12,7 +12,7 @@ export default class Header extends React.Component {
 
 
   render() {
-    
+
     return (
 
       <>
@@ -20,7 +20,7 @@ export default class Header extends React.Component {
           ?
           <>
             <Navbar className="nav" bg="dark">
-              <Navbar.Brand href="/">Vent IT</Navbar.Brand>
+              <Navbar.Brand href="/"><h1>Vent <span>IT</span ></h1></Navbar.Brand>
               <Navbar.Toggle />
               <div className="User">
                 <Navbar.Collapse >

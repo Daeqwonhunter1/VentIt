@@ -20,7 +20,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @subvent.posts << @post
     @post.user = @current_user
-    byebug
+   
     if @post.save
       render json: @post, status: :created
     else
