@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { showAllSubvents } from '../services/api-helper';
-import { Card, Button, Dropdown, ButtonToolbar,Tab,Tabs } from 'react-bootstrap'
+import { Card, Button, Dropdown, ButtonToolbar, Tab, Tabs } from 'react-bootstrap'
 class SubventList extends Component {
   state = {
     subvents: []
@@ -38,7 +38,7 @@ class SubventList extends Component {
           {subvents && subvents.map(subvent =>
             <div id="subvents" key={subvent.id}>
               <Card className="Cards" style={{ width: '40rem', height: '20rem' }}>
-                <Card.Img className="card_image" variant="top" src={subvent.image_url} />
+                <Card.Img className="card_image" variant="top" src={subvent.image_url == null ? "https://i.imgur.com/E5OxVm7.jpg" : subvent.image_url} />
                 <Card.Body>
                   <Card.Title className="card_title">{subvent.vent_title}</Card.Title>
                   <Card.Text className="card_description">

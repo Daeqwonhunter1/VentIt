@@ -5,17 +5,18 @@ import CreatePostForm from './CreatePostForm'
 import { showAllPostsInSubvent, postNewPostInSubvent } from '../services/api-helper';
 import UpdatePostForm from './UpdatePostForm'
 import CommentList from './CommentList'
+import CommentContainer from './CommentContainer'
 
 class ItemContainer extends Component {
   constructor() {
     super()
     this.state = {
       currentPostContainer: " ",
-      posts:[]
+      posts: []
     }
   }
 
-  
+
 
   // // // =============== Read ===============
 
@@ -28,25 +29,25 @@ class ItemContainer extends Component {
 
 
   createPost = async (subventId, postData) => {
-    
+
     // eslint-disable-next-line
     const post = await postNewPostInSubvent(subventId, postData);
     this.props.history.push(`/subvents/${subventId}/posts`)
   }
 
   render() {
-   
+
     return (
       <div>
         <Route path='/subvents/:subventId/posts/create_post' render={(props) => (
           <CreatePostForm
-            currentSubventId = {props.match.params.subventId}
+            currentSubventId={props.match.params.subventId}
             createPost={this.createPost}
-           
+
           />
         )} />
-{/* 
-        <Route path='/subvents/:subventId/posts/:postId/comments' render={(props) => (
+
+        {/* <Route path='/subvents/:subventId/posts/:postId/comments' render={(props) => (
           <CommentList
             currentSubventId={props.match.params.subventId}
             postId={props.match.params.postId}/>
@@ -60,9 +61,13 @@ class ItemContainer extends Component {
             handlePostChange={this.handlePostChange}
             PostFormData={this.state.PostFormData}
             posts={this.state.posts}
-            getAllPosts = {this.getAllPosts}
+            getAllPosts={this.getAllPosts}
           />
         )} />
+
+        <CommentContainer
+          currentSubventId={this.props.match.params.subventId}
+          postId={this.props.match.params.postId} />
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
-import {updateSubvent} from '../services/api-helper'
+import {Form } from 'react-bootstrap'
+import { updateSubvent } from '../services/api-helper'
 
 class UpdateSubventForm extends Component {
   state = {
@@ -35,10 +35,10 @@ class UpdateSubventForm extends Component {
     // eslint-disable-next-line
     const updated = await updateSubvent(subventId, subventData)
     this.setState({
-      vent_title:null,
-      description:null
+      vent_title: null,
+      description: null
     })
-   
+
     this.props.getAllSubvents()
     this.props.history.push(`/subvents/${subventId}`)
   }
@@ -52,35 +52,29 @@ class UpdateSubventForm extends Component {
       description } = this.state;
     return (
       <div id="update-wishlist-div">
-        <form className="create-form" onSubmit={(e) => {
+
+        <Form className="create-form" onSubmit={(e) => {
           e.preventDefault();
           this.updateSubvent(this.props.subventId, this.state);
         }}>
-          <h2 className="update-header">Update Wishlist</h2>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Control type="text"
+              name="vent_title"
+              id="name"
+              value={vent_title}
+              onChange={this.handleChange} />
+          </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Control type="text"
+              name="description"
+              id="description"
+              value={description}
+              onChange={this.handleChange} />
+          </Form.Group>
 
-          {/* <label htmlFor="name">name</label> */}
-          <input
-            className="input-fields"
-            type="text"
-            name="vent_title"
-            id="name"
-            value={vent_title}
-            onChange={this.handleChange}
-          />
-          <br />
-          {/* <label htmlFor="description">description</label> */}
-          <input
-            className="input-fields"
-            type="text"
-            name="description"
-            id="description"
-            value={description}
-            onChange={this.handleChange}
-          />
-          <br />
-          <button className="update-button">Submit</button>
-        </form>
-      </div>
+        </Form>
+
+      </div >
     )
   }
 }

@@ -24,7 +24,7 @@ body {
 
 .User {
   position: relative;
-  left:143vh
+  left:130vh
 }
 
 #login-submit-button {
@@ -138,10 +138,6 @@ body {
   width:100px;
 }
 
-.carousel {
-  width:500px;
-  height:500px
-}
 
 .title {
   color:black;
@@ -155,4 +151,47 @@ body {
 
 h1 span {
   color:#7395AE
+}
+
+#post-carousel {
+  position: relative;
+  left:0%;  
+}
+
+
+#carousel {
+ height: 100%;
+ width:900px;
+ position: relative;
+ left:15%
+}
+
+#subventForm {
+  position: relative;
+  left:20%;
+  width:50%
+
+}
+
+.create-form {
+  position: relative;
+  left:20%;
+  width:50%
+}
+
+#create-item-form {
+
+ 
+  transform: translate(0px,100px);
+}
+
+.info {
+font-size:30px;
+color:black;
+
+}
+
+.infor {
+  background-color: rgba(102, 101, 101, 0.829);
+  border:1px solid black
 }

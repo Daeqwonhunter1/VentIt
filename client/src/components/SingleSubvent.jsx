@@ -79,7 +79,7 @@ class SingleSubvent extends Component {
 
         {currentSubvent && (
           <>
-            {currentSubvent.vent_title}
+            <h1>{`v/${currentSubvent.vent_title}`}</h1>
 
             {
               currentSubvent.user_id === this.props.currentUserId ?

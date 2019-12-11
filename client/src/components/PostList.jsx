@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import {
   verifyUser, destroyPostInSubvent
 } from '../services/api-helper'
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Button, ButtonGroup } from 'react-bootstrap';
 
 
 class PostList extends Component {
@@ -36,7 +36,7 @@ class PostList extends Component {
         return post.id !== postId
       })
     }))
-    this.props.history.push(`/subvents`)
+    this.props.history.push(`${this.props.location.pathname}`)
   }
 
 
@@ -46,31 +46,35 @@ class PostList extends Component {
     console.log(this.props)
 
     return (
-      <div id="item-list">
-        <Carousel>
+      <div id="carousel">
+        <Carousel id="post-carousel">
           {posts && posts.map(post =>
-
             <Carousel.Item>
-              <img
+              <Link to={`${this.props.location.pathname}/${post.id}/comments`} > <img
                 className="d-block w-100"
-                src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                src={post.image_url == null ? "https://previews.123rf.com/images/mikekiev/mikekiev1709/mikekiev170900038/86953191-skeleton-makes-selfie-in-the-dark.jpg" : post.image_url}
                 alt={post.alt}
-              />
+                height="600"
+                width="300"
+              /></Link>
               <>
                 <Carousel.Caption>
-                  <h3>{post.post_title}</h3>
-                  <p>{post.post_content}</p>
+                  <div className="infor">
+                    <h3 className=" info">{post.post_title}</h3>
+                    <p className=" info">{post.post_content}</p>
+                  </div>
+                  {this.state.currentUser.id === post.user_id ?
+                    <>
+                      <Button variant="outline-secondary">Edit</Button>
+                      <Button variant="outline-secondary" onClick={() => { this.destroyPost(this.props.location.pathname, post.id) }}>Delete</Button>
+                    </>
+                    :
+                    false
+                  }
                 </Carousel.Caption>
-              {this.state.currentUser.id === post.user_id ?
-                <>
-                  <Link to={`${this.props.location.pathname}/${post.id}/edit`}> <button>Edit</button></Link>
-                  <button onClick={() => { this.destroyPost(this.props.location.pathname, post.id) }}>Delete</button>
-                </>
-                :
-                false
-              }
+
               </>
-              </Carousel.Item>
+            </Carousel.Item>
           )}
         </Carousel>
       </div>
